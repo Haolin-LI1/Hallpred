@@ -1,0 +1,85 @@
+<!--
+  ==========================================[ Query ]===================================================
+
+  query.html
+  css link:superposition.css
+
+  =======================================[ Introduction ]===============================================
+
+  This page is the user input interface for superposition analysis. It describes the detail information
+  of this function and guides users to use correctly.
+
+  ======================[ The parameters transfer to django view function ]=============================
+
+  formset: the collection of all forms
+  form: each set of variation entered by the user
+
+  ======================================================================================================
+-->
+
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hall Lab: Superposition Analysis</title>
+    <script src="{% static 'js/jquery-3.7.0.min.js' %}"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif&family=Parisienne">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/superposition.css' %}">
+    
+    <script>
+        function generateTemplate() {
+            var users_type = document.getElementsByClassName('queryInput');
+            var default_users_type = users_type[users_type.length - 1];
+            default_users_type.value = 'pik3ca.PRO.3.CYS, abl1.GLY.1.ALA, abl1.LEU.6.VAL';
+        }
+        function resetField() {
+            var users_type = document.querySelectorAll('.queryInput input');
+            users_type.forEach(function(clear_users_type) {
+                clear_users_type.value = '';
+            });
+        }
+    </script>
+
+</head>
+<body>
+
+    <div class="guide-frame">
+        <div class="guide-frame-fig"></div>
+        <div class="guide-frame-fig-overlay"></div>
+        <h1 class="guide-frame-title">Hall Lab : Superposition Analysis</h1>
+    </div>
+    
+    <div class="main-boxframe">
+        <h1>--------------------------------- Superposition Analysis ---------------------------------</h1><br>
+        <h2>Please enter the single/group gene mutations to analyse.</h2><br>
+        <pre class="input-format">
+<span class="function-title">Input format:</span> "protein name" + "gene mutation from" + "position" + "gene mutation to"
+                        (each item is separated by dot ".", each gene mutation is separated by comma ",")
+<span class="function-title">Example:</span> <span class="ex1">pik3ca.PRO.3.CYS</span>, <span class="ex2">abl1.GLY.1.ALA</span>, <span class="ex3">abl1.LEU.6.VAL</span>
+        </pre>
+
+        <form method="post" action="{% url 'myapp:query' %}">
+            {% csrf_token %}
+            <div id="queryFormset">
+                {{ formset.management_form }}
+                {% for form in formset %}
+                    <div class="queryInput">
+                        {{ form.query_input }}
+                        {% for error in form.query_input.errors %}
+                            <div class="error-message">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+            <p>Input format: protein.mut_from.pdb_rid.mut_to, ...Next one...</p>
+            <input type="button" value="Generate Template" onclick="generateTemplate()">
+            <input type="button" value="Reset" onclick="resetField()">
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+
+
+</body>
+</html>

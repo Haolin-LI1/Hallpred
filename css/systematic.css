@@ -1,0 +1,172 @@
+/* ---------------------------------------------- */
+/* --------------------top-box------------------- */
+/* ---------------------------------------------- */
+
+.guide-frame {
+    position: relative;  
+    width:100%;
+    height: 90px;
+}
+.guide-frame-fig {
+    right: 0;
+    position: absolute;
+    background: url('/static/img/topbg.jpg');
+    background-repeat: no-repeat;
+    bottom: 0;
+    background-position: right 180px top; /* Add the image to the right position of top-box */
+    left: 0;
+    background-size:contain;
+    z-index: 1; /* keep the figure is above the overlay */
+    top: 0;
+}
+
+.guide-frame-fig-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.guide-frame-fig-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 89.5%;
+    background: linear-gradient(to right, #091343, #123972); /* Use gradient color to decorate the guide-frame */
+}
+
+.guide-frame-fig-overlay::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 10.5%;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to left, #091343, #123972); /* Use gradient color to decorate the guide-frame */
+}
+
+.guide-frame-title {
+    font-family: 'PT Serif';
+    font-size: 40px;
+    color: #fff;
+    position: absolute;
+    left: 100px;
+    top: -10px;
+}
+
+/* ---------------------------------------------------- */
+/* --------------------main-boxframe------------------- */
+/* ---------------------------------------------------- */
+
+.main-boxframe {
+    position:relative;
+    top:50px;
+    width: 100%;
+    height: auto;
+    background: rgba(10, 23, 55, 0.9);
+    border: 1px solid #0088cc; 
+    border-radius: 5px;
+    font-family: 'Arial';
+    color: #ffffff;
+    transition: all 0.5s ease; /* Let the color change have a transition within the specified time */
+}
+
+.main-boxframe h1{
+    padding: 0 20px;
+    text-align: center;
+    font-family: 'Parisienne' ;
+    font-size: 40px;
+    margin-bottom: -20px;
+}
+
+.main-boxframe h2{
+    padding: 0 20px;
+    font-family: 'Arial' ;
+    font-size: 20px;
+    line-height: 30px;
+    margin-bottom: -30px;
+}
+
+pre.input-format {
+    font-family: Arial;
+    white-space: pre-wrap;
+    color: #ffffff;
+    line-height: 40px;
+    font-size: 18px;
+    margin-bottom: -5px;
+    padding: 0 20px;
+}
+
+.function-title {
+    color: rgb(189, 179, 255);
+    font-weight: bold;
+}
+
+.ex1 {
+    color: rgb(246, 103, 93);
+    font-weight: 500;
+}
+
+.ex2 {
+    color: rgb(221, 253, 106);
+    font-weight: 500;
+}
+
+.ex3 {
+    color: rgb(87, 249, 90);
+    font-weight: 500;
+}
+
+/* ------------------------------------------------ */
+/* --------------------input-box------------------- */
+/* ------------------------------------------------ */
+
+form input[type="text"]{
+    width: 8%;
+    height: 35px;
+    padding: 10px 10px;
+    margin: 8px 5px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: 0.3s; /* Let the color change have a transition within the specified time */
+    font-size: 15px;
+}
+
+form label {
+    padding: 0 0 0 20px;
+    font-family: 'Arial' ;
+    font-size: 17px;
+}
+
+form input[type="submit"] {
+    margin: 0 0 20px 20px;
+    cursor: pointer;
+    width: 100px;
+    height: 30px;
+    border: none;
+    background-color: #5B9DD9;
+    color: #ffffff;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.5s ease; /* Let the color change have a transition within the specified time */
+}
+
+form input[type="submit"]:hover {
+    background-color: #4A8DC8;
+}
+
+/* ------------------------------------------------ */
+/* ------------------error-message----------------- */
+/* ------------------------------------------------ */
+
+.error-message {
+    color: rgb(244, 167, 167);
+    margin: 0 0 0 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
