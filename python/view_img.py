@@ -169,7 +169,7 @@ def generate_boxplot(figsize,dataset,color='cornflowerblue',title='Box Plot',xla
     
     return img_url
 
-def generate_cdfplot(figsize,dataset,threshold,title='Cumulative Distribution Function',xlabel='ddg (kcal/mol)',ylabel='CDF'):
+def generate_cdfplot(figsize,dataset,threshold,title='Cumulative Distribution Function',xlabel='ddg (kcal/mol)',ylabel='Probability Density'):
 
     """ 
     ================================== [ Introduction ] ======================================
@@ -216,9 +216,11 @@ def generate_cdfplot(figsize,dataset,threshold,title='Cumulative Distribution Fu
     probability = np.sum(combined_ddgs_array > threshold) / len_combined_ddgs
 
     plt.figure(figsize=figsize)
-    plt.plot(combined_ddgs_array, cumulative_probability, label='CDF')
-    plt.fill_between(combined_ddgs_array, cumulative_probability, where=(combined_ddgs_array>=threshold), interpolate=True, color='red', alpha=0.3, label=f'Over threshold {threshold}')
-    plt.text(0.1, 0.6, f'Prob > threshold = {probability:.2%}', transform=plt.gca().transAxes)
+    plt.plot(combined_ddgs_array, cumulative_probability)
+
+    y_corresponding_threshold = np.interp(threshold, combined_ddgs_array, cumulative_probability)
+    
+    plt.fill_between(combined_ddgs_array, y_corresponding_threshold, cumulative_probability, where=(cumulative_probability>=y_corresponding_threshold), interpolate=True, color='red', alpha=0.3, label=f'Prob > threshold = {probability:.2%}')
 
     plt.title(title)
     plt.xlabel(xlabel)
